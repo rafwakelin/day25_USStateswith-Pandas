@@ -2,8 +2,6 @@ import turtle
 import pandas
 
 guesses = []
-states_to_learn = []
-
 # Setting the screen
 screen = turtle.Screen()
 screen.title("Guess the State")
@@ -21,9 +19,7 @@ while len(guesses) < 50:
 
     # Exits thr game if user type exit and creates a csv file with the states user didn't guess
     if formatted_answer == "Exit":
-        for state in states_list:
-            if state not in guesses:
-                states_to_learn.append(state)
+        states_to_learn = [state for state in states_list if state not in guesses]
         data_frame = pandas.DataFrame(states_to_learn)
         data_frame.to_csv("States_to_Learn.csv")
         break
